@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorteador de Daily</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎲 Sorteador de Daily</h1>
+            <p>Clique no botão para sortear a ordem de apresentação da daily</p>
+        </header>
+
+        <main>
+            <div class="people-list">
+                <h2>Lista de Pessoas:</h2>
+                <p class="subtitle">Marque as pessoas que participarão do sorteio:</p>
+                <ul id="peopleList">
+                    <li class="person-item">
+                        <label class="person-checkbox">
+                            <input type="checkbox" checked data-person="Juliana Custodio">
+                            <span class="checkmark"></span>
+                            <span class="person-name">Juliana Custodio</span>
+                        </label>
+                    </li>
+                    <li class="person-item">
+                        <label class="person-checkbox">
+                            <input type="checkbox" checked data-person="Carlos Spoljarick">
+                            <span class="checkmark"></span>
+                            <span class="person-name">Carlos Spoljarick</span>
+                        </label>
+                    </li>
+                    <li class="person-item">
+                        <label class="person-checkbox">
+                            <input type="checkbox" checked data-person="David Martinez">
+                            <span class="checkmark"></span>
+                            <span class="person-name">David Martinez</span>
+                        </label>
+                    </li>
+                    <li class="person-item">
+                        <label class="person-checkbox">
+                            <input type="checkbox" checked data-person="Bruno Borges">
+                            <span class="checkmark"></span>
+                            <span class="person-name">Bruno Borges</span>
+                        </label>
+                    </li>
+                    <li class="person-item">
+                        <label class="person-checkbox">
+                            <input type="checkbox" checked data-person="Catharina Mesquita">
+                            <span class="checkmark"></span>
+                            <span class="person-name">Catharina Mesquita</span>
+                        </label>
+                    </li>
+                    <li class="person-item">
+                        <label class="person-checkbox">
+                            <input type="checkbox" checked data-person="Eduardo Hamada">
+                            <span class="checkmark"></span>
+                            <span class="person-name">Eduardo Hamada</span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="controls">
+                <button id="sortButton" class="sort-btn">🎯 Sortear Ordem</button>
+                <button id="resetButton" class="reset-btn" style="display: none;">🔄 Resetar</button>
+            </div>
+
+            <div class="result-section" id="resultSection" style="display: none;">
+                <h2>Ordem Sorteada:</h2>
+                <ol id="sortedOrder" class="sorted-list"></ol>
+            </div>
+        </main>
+
+        <footer>
+            <p>Feito com ❤️ por Catharina Mesquita</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
