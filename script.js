@@ -54,6 +54,11 @@ function sortPeople() {
         li.textContent = `${index + 1}. ${person}`;
         li.classList.add('sorted-item');
 
+        // Destaca o primeiro lugar
+        if (index === 0) {
+            li.classList.add('first-place');
+        }
+
         // Adiciona animação de entrada
         li.style.opacity = '0';
         li.style.transform = 'translateY(20px)';
@@ -65,6 +70,11 @@ function sortPeople() {
             li.style.transition = 'all 0.3s ease';
             li.style.opacity = '1';
             li.style.transform = 'translateY(0)';
+
+            // Dispara confetes quando o primeiro lugar aparece
+            if (index === 0) {
+                createConfetti();
+            }
         }, index * 100);
     });
 
@@ -156,3 +166,73 @@ resetButton.addEventListener('mouseenter', () => {
 resetButton.addEventListener('mouseleave', () => {
     resetButton.style.transform = 'scale(1)';
 });
+
+// Função para criar animação de confetes
+function createConfetti() {
+    const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#f0932b', '#eb4d4b', '#6c5ce7', '#a29bfe', '#00b894', '#00cec9'];
+    const confettiCount = 150;
+    const duration = 3000; // 3 segundos
+
+    for (let i = 0; i < confettiCount; i++) {
+        setTimeout(() => {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+
+            // Posição inicial aleatória no topo da tela
+            const startX = Math.random() * window.innerWidth;
+            const startY = -10;
+
+            // Cor aleatória
+            const color = colors[Math.floor(Math.random() * colors.length)];
+
+            // Tamanho aleatório
+            const size = Math.random() * 10 + 5;
+
+            // Velocidade e direção aleatórias
+            const velocityX = (Math.random() - 0.5) * 4;
+            const velocityY = Math.random() * 3 + 2;
+            const rotation = Math.random() * 360;
+            const rotationSpeed = (Math.random() - 0.5) * 10;
+
+            // Aplica estilos
+            confetti.style.position = 'fixed';
+            confetti.style.left = startX + 'px';
+            confetti.style.top = startY + 'px';
+            confetti.style.width = size + 'px';
+            confetti.style.height = size + 'px';
+            confetti.style.backgroundColor = color;
+            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+            confetti.style.pointerEvents = 'none';
+            confetti.style.zIndex = '9999';
+            confetti.style.opacity = '0.9';
+            confetti.style.transform = `rotate(${rotation}deg)`;
+            confetti.style.willChange = 'transform, opacity';
+
+            document.body.appendChild(confetti);
+
+            // Anima o confete caindo
+            const startTime = performance.now();
+            const animate = (currentTime) => {
+                const elapsed = currentTime - startTime;
+                if (elapsed < duration) {
+                    const progress = elapsed / duration;
+                    // Física: movimento horizontal constante, vertical com aceleração
+                    const currentX = startX + velocityX * elapsed / 16; // 16ms ≈ 1 frame a 60fps
+                    const currentY = startY + velocityY * elapsed / 16 + 0.5 * 0.5 * (elapsed / 16) * (elapsed / 16);
+                    const currentRotation = rotation + rotationSpeed * elapsed / 10;
+
+                    confetti.style.left = currentX + 'px';
+                    confetti.style.top = currentY + 'px';
+                    confetti.style.transform = `rotate(${currentRotation}deg)`;
+                    confetti.style.opacity = (1 - progress).toString();
+
+                    requestAnimationFrame(animate);
+                } else {
+                    confetti.remove();
+                }
+            };
+
+            requestAnimationFrame(animate);
+        }, i * 10); // Espaça a criação dos confetes
+    }
+}
