@@ -5,7 +5,8 @@ const people = [
     'David Martinez',
     'Bruno Borges',
     'Catharina Mesquita',
-    'Eduardo Hamada'
+    'Eduardo Hamada',
+    'Danilo Hoffmeister'
 ];
 
 // Função para obter pessoas ativas (marcadas nos checkboxes)
